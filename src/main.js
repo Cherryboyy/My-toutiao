@@ -10,8 +10,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 //配制axios
 import axios from 'axios'
-Vue.prototype.$http = axios
-Vue.use(ElementUI)
+
+Vue.use(ElementUI).prototype.$http = axios
 
 
 
