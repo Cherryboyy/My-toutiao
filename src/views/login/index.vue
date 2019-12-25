@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import store from '../../store'
   export default {
     data () {
       //rule当前字段的校验对象，value字段的值，callback回调函数，成功或者失败
@@ -59,6 +60,9 @@
               .post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
               .then(res=> {
                 console.log(res.data)
+                //存储用户信息
+                store.setUser(res.data.data)//res.data
+                //跳转
                 this.$router.push('/')
                 this.$message.success('登录成功')
               })
