@@ -1,23 +1,24 @@
 <template>
   <el-container class="wrapper">
     <el-aside width="200px" :width="isCollapse?'64px':'200px'">
-      <el-menu
-        :collapse="isCollapse"
-        :collapse-transition="false"
-        default-active="2"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b">
+<!--      <el-menu-->
+<!--        :collapse="isCollapse"-->
+<!--        :collapse-transition="false"-->
+<!--        default-active="2"-->
+<!--        background-color="#545c64"-->
+<!--        text-color="#fff"-->
+<!--        active-text-color="#ffd04b">-->
 
-        <!-- el-submenu   有子菜单的菜单项-->
-        <!-- el-menu-item  没有子菜单的菜单项 -->
-        <el-menu-item index="2">
-          <i class="el-icon-menu"></i>
-          <span slot="title">导航二</span>
-        </el-menu-item>
-      </el-menu>
+<!--        &lt;!&ndash; el-submenu   有子菜单的菜单项&ndash;&gt;-->
+<!--        &lt;!&ndash; el-menu-item  没有子菜单的菜单项 &ndash;&gt;-->
+<!--        <el-menu-item index="2">-->
+<!--          <i class="el-icon-menu"></i>-->
+<!--          <span slot="title">导航二 K</span>-->
+<!--        </el-menu-item>-->
+<!--      </el-menu>-->
       <div class="logo" :class="{miniLogo:isCollapse}"></div>
       <!-- 导航菜单 -->
+<!--      default-active指定那个菜单被激活选中-->
       <el-menu
         :collapse="isCollapse"
         :collapse-transition="false"
@@ -75,7 +76,9 @@
           </el-dropdown>
         </el-header>
       </el-header>
-      <el-main>Main</el-main>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>

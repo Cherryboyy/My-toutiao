@@ -78,7 +78,7 @@
     width: 100%;
     height: 100%;
     /*// 背景图定位 / 背景图尺寸 contain 等比缩放完整在容器内显示  cover  等比缩放完全铺面容器*/
-    background: url(../../assets/images/login_bg.jpg) no-repeat center / cover
+    background: url(../../assets/images/true.gif) no-repeat center / cover
   }
 
   .my-card {
@@ -87,6 +87,7 @@
     position: absolute;
     left: 50%;
     top: 50%;
+    background-color: rgba(0,0,0,.3);
     transform: translate(-50%, -60%);
   }
 
