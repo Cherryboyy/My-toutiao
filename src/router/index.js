@@ -30,9 +30,9 @@ const router = new VueRouter({
 })
 
 //前置守卫
-// router.beforeEach((to,from,next)=> {
-//   //to去哪里，from来自哪里，next放行
-//   if (to.path != '/login' && !store.getUser().token) return next('/login')
-//   next()
-// })
+router.beforeEach((to,from,next)=> {
+  //to去哪里，from来自哪里，next放行
+  if (to.path != '/login' && !store.getUser().token) return next('/login')
+  next()
+})
 export default router

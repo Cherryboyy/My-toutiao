@@ -9,11 +9,10 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 //配制axios
-import axios from 'axios'
+import axios from './api/index'
 
-Vue.use(ElementUI).prototype.$http = axios
-
-
+Vue.use(ElementUI)
+Vue.prototype.$http = axios
 
 //这是日志的详细
 Vue.config.productionTip = false

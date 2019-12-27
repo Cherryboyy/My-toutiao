@@ -1,18 +1,22 @@
 <template>
-  <div>
-    <img id="gif" src="../../assets/images/true.gif" alt="">
+  <div id="gif">
   </div>
 </template>
 
 <script>
   export default {
-    name: ''
+    created() {
+      this.$http.get('user/profile').then(res =>{
+        console.log(res.data)
+      })
+    }
   }
 </script>
 
 <style scoped>
-  #gif {
+#gif {
     width: 100%;
     height: 100%;
+    background: url("../../assets/images/true.gif") no-repeat center/cover;
   }
 </style>
