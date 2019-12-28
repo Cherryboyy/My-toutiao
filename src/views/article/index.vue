@@ -2,10 +2,7 @@
   <el-card class="box-card">
     <div slot="header">
       <!--      面包屑-->
-      <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>内容管理</el-breadcrumb-item>
-      </el-breadcrumb>
+        <my-bread>内容管理</my-bread>
     </div>
     <!--    表单区域-->
     <el-form label-width="80px" size="small">
@@ -43,11 +40,11 @@
       </el-form-item>
     </el-form>
   </el-card>
-  <el-card class="box-card">
-    <div slot="header" class="clearfix">
-      <span>卡片名称</span>
-    </div>
-  </el-card>
+<!--  <el-card class="box-card">-->
+<!--    <div slot="header" class="clearfix">-->
+<!--      <span>卡片名称</span>-->
+<!--    </div>-->
+<!--  </el-card>-->
 </template>
 
 <script>

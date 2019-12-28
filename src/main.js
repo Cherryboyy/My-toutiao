@@ -8,6 +8,10 @@ import router from './router/index'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+//注册全局组件
+import MyBread from './components/my-bread'
+Vue.component('my-bread',MyBread)
+
 //配制axios
 import axios from './api/index'
 
