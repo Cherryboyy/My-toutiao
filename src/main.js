@@ -9,8 +9,11 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 //注册全局组件
-import MyBread from './components/my-bread'
-Vue.component('my-bread',MyBread)
+// import MyBread from './components/my-bread'
+// Vue.component('my-bread',MyBread)
+// 使用自己的插件
+import plugin from './plugin'
+Vue.use(plugin)
 
 //配制axios
 import axios from './api/index'
