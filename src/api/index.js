@@ -5,6 +5,13 @@ import store from '../store/index'
 axios.defaults.baseURL='http://ttapi.research.itcast.cn/mp/v1_0/'
 //axios.defaults.headers.Authorization=`Bearer ${store.getUser().token}`
 
+//导入 json-bigint
+// import  JSONBIGINT from 'json-bigint'
+// transformResponse: [function (data) {
+//   // 使用 json-bigint 进行转换
+//   return JSONBIGINT.parse(data);
+// }],
+
 
 //请求拦截器
 // 添加请求拦截器
