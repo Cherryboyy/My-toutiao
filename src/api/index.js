@@ -12,8 +12,15 @@ axios.interceptors.request.use(config=> {
   config.headers.Authorization=`Bearer ${store.getUser().token}`
   // 在发送请求之前做些什么
   return config;
-}, function (error) {
+}, error=> {
   // 对请求错误做些什么
   return Promise.reject(error);
 });
+//响应拦截器
+axios.interceptors.response.use(res=>res,err=> {
+  if(err.response.status ===401) {
+    router.push('/login')
+  }
+  return Promise.reject(err)
+})
 export default axios
