@@ -3,11 +3,15 @@ import VueRouter from 'vue-router'
 import Vue from 'vue'
 import store from '../store'
 
-
+//登录页
 import Login from '../views/login/index'
+//主页
 import Home from '../views/home'
 import Welcome from '../views/welcome/index'
+//404页面
 import NotFound from '../views/404'
+//内容管理页
+import Article from '../views/article'
 
 Vue.use(VueRouter)
 
@@ -21,11 +25,14 @@ const router = new VueRouter({
       component: Home,
       children :[
         //欢迎页面
-        {path:'/',component:Welcome}
+        {path:'/',component:Welcome},
+        //内容管理页面
+        {path:'/article',component:Article}
       ]
     },
     //404页面
-    {path:'*',component:NotFound}
+    {path:'*',component:NotFound},
+
   ]
 })
 

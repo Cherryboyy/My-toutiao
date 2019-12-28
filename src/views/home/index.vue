@@ -22,7 +22,7 @@
       <el-menu
         :collapse="isCollapse"
         :collapse-transition="false"
-        default-active="/"
+        :default-active="$route.path"
         background-color="#002033"
         text-color="#fff"
         active-text-color="#ffd04b"
@@ -84,6 +84,7 @@
 </template>
 
 <script>
+  //引入储存本地信息文件
   import store from '../../store'
   export default {
     // name: ''
@@ -107,6 +108,7 @@
       setting () {
         this.$router.push('/setting')
       },
+      //清空本地tekon值
       logout() {
         store.delUser()
         this.$router.push('/login')
