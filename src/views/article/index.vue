@@ -17,19 +17,20 @@
             <el-radio :label="4">已删除</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="频道：">
-          <el-select v-model="filterParams.channel_id"
-                     @change="changeChannel"
-                     clearable
-                     placeholder="请选择">
-            <el-option
-              v-for="item in channelOptions"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id">
-            </el-option>
-          </el-select>
-        </el-form-item>
+<!--        <el-form-item label="频道：">-->
+<!--          <el-select v-model="filterParams.channel_id"-->
+<!--                     @change="changeChannel"-->
+<!--                     clearable-->
+<!--                     placeholder="请选择">-->
+<!--            <el-option-->
+<!--              v-for="item in channelOptions"-->
+<!--              :key="item.id"-->
+<!--              :label="item.name"-->
+<!--              :value="item.id">-->
+<!--            </el-option>-->
+<!--          </el-select>-->
+<!--        </el-form-item>-->
+        <my-channel v-model="filterParams.channel_id"></my-channel>
         <el-form-item label="日期：">
           <el-date-picker
             v-model="dateArr"
@@ -122,16 +123,16 @@
       };
     },
     created() {
-      this.getChannelOptions()
+      // this.getChannelOptions()
       this.getArticles()
     },
     //获取下拉分类的数据
     methods: {
-      async getChannelOptions() {
-        const {data: {data}} = await this.$http.get('channels')
-        this.channelOptions = data.channels
-        // console.log(data)
-      },
+      // async getChannelOptions() {
+      //   const {data: {data}} = await this.$http.get('channels')
+      //   this.channelOptions = data.channels
+      //   // console.log(data)
+      // },
       //获取文章数据
       async getArticles() {
         const {data: {data}} = await this.$http.get('articles',
@@ -162,10 +163,10 @@
         //   this.filterParams.end_pubdate = null
         // }
       },
-      //频道处理函数
-      changeChannel() {
-        if (this.filterParams.channel_id === '') this.filterParams.channel_id = null
-      },
+      // //频道处理函数
+      // changeChannel() {
+      //   if (this.filterParams.channel_id === '') this.filterParams.channel_id = null
+      // },
       //删除文章
       async delArticle (articleId) {
         //发送删除请求
