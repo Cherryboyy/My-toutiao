@@ -12,7 +12,8 @@ import Welcome from '../views/welcome/index'
 import NotFound from '../views/404'
 //内容管理页
 import Article from '../views/article'
-
+//素材管理页
+import Image from '../views/image'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -27,7 +28,9 @@ const router = new VueRouter({
         //欢迎页面
         {path:'/',component:Welcome},
         //内容管理页面
-        {path:'/article',component:Article}
+        {path:'/article',component:Article},
+        //素材管理页
+        {path:'image',component:Image}
       ]
     },
     //404页面
