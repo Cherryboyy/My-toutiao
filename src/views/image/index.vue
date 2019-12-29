@@ -26,7 +26,11 @@
       <el-pagination
         background
         layout="prev, pager, next"
-        :total="1000">
+        :current-page="filterParams.page"
+        :page-size = "filterParams.per_page"
+        @current-change="changPager"
+        :total="total">
+
       </el-pagination>
     </el-card>
   </div>
@@ -43,6 +47,7 @@
           page: 1,
           per_page: 10
         },
+        total:0,
         //图片数据
         images: []
       }
@@ -53,10 +58,16 @@
     },
     methods: {
       async getImages() {
-        const {data: {data}} = await this.$http.get('/user/images',
+        const {data: {data}} = await this.$http.get('user/images',
           {params: this.filterParams})
         this.images = data.results
+        this.total = data.total_count
         console.log(this.images)
+      },
+      //处理页码改变
+      changPager(newPage) {
+        this.filterParams.page = newPage
+        this.getImages()
       }
     }
   }
