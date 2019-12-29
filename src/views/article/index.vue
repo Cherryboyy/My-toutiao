@@ -78,9 +78,9 @@
         <el-table-column label="发布时间" prop="pubdate">
         </el-table-column>
         <el-table-column label="操作" width="120px">
-          <template>
-            <el-button plain type="primary" icon="el-icon-edit" circle></el-button>
-            <el-button plain type="danger" icon="el-icon-delete" circle></el-button>
+          <template slot-scope="scope">
+            <el-button plain type="primary" @click="toEdit(scope.row.id)" icon="el-icon-edit" circle></el-button>
+            <el-button plain type="danger" @click="delArticle(scope.row.id)" icon="el-icon-delete" circle></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -130,7 +130,7 @@
       async getChannelOptions() {
         const {data: {data}} = await this.$http.get('channels')
         this.channelOptions = data.channels
-        console.log(data)
+        // console.log(data)
       },
       //获取文章数据
       async getArticles() {
@@ -138,7 +138,7 @@
           {params: this.filterParams})
         this.articles = data.results
         this.total = data.total_count
-        console.log(data)
+        // console.log(data)
       },
       //获取当前分页以及数据
       changePager(newPage) {
@@ -165,6 +165,23 @@
       //频道处理函数
       changeChannel() {
         if (this.filterParams.channel_id === '') this.filterParams.channel_id = null
+      },
+      //删除文章
+      async delArticle (articleId) {
+        //发送删除请求
+        try {
+          await this.$http.delete(`articles/${articleId}`)
+          this.$message.success('删除成功')
+          //重新渲染页面
+          this.getArticles()
+        }catch (e) {
+          console.log(e)
+          this.$message.error('删除失败')
+        }
+      },
+      //编辑文章跳转
+      toEdit(articleId) {
+        this.$router.push(`/publish?id=${articleId}`)
       }
     }
   }

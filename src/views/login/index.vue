@@ -35,7 +35,7 @@
       }
       return {
         loginForm: {
-          mobile: '13911111111',
+          mobile: '13200000000',
           code: '246810',
           // check: true
         },
