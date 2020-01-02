@@ -10,7 +10,33 @@
           <el-radio-button :label="false">全部</el-radio-button>
           <el-radio-button :label="true">收藏</el-radio-button>
         </el-radio-group>
-        <el-button style="float:right" type="success" size="small">添加素材</el-button>
+        <!--        上传素材-->
+        <el-dialog
+          title="提示"
+          :visible.sync="dialogVisible"
+          width="300px"
+        >
+          <span>
+            <el-upload
+              class="avatar-uploader"
+              action="http://ttapi.research.itcast.cn/mp/v1_0/user/images"
+              :headers="headers"
+              :show-file-list="false"
+              :on-success="uploadSuccess"
+              name="image"
+            >
+  <img v-if="imageUrl" :src="imageUrl" class="avatar">
+  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+</el-upload>
+          </span>
+
+        </el-dialog>
+        <el-button
+          @click="openDialog()"
+          style="float:right"
+          type="success"
+          size="small">添加素材
+        </el-button>
 
       </div>
       <div class="img_list">
@@ -37,6 +63,9 @@
 </template>
 
 <script>
+  import '../../styles/index.less'
+  import store from '../../store/index.js'
+
   export default {
     name: "",
     data() {
@@ -49,9 +78,18 @@
         },
         total: 0,
         //图片数据
-        images: []
+        images: [],
+        //上传框
+        dialogVisible: false,
+        //上传的图片框
+        imageUrl: null,
+        //设置上传请求头
+        headers: {
+          Authorization: `Bearer ${store.getUser().token}`
+        },
       }
     },
+
     //页面初始化的时候加载，请求数据
     created() {
       this.getImages()
@@ -96,7 +134,22 @@
         } catch (e) {
           this.$message.error('删除图片失败')
         }
-      }
+      },
+      //上传组件
+      openDialog() {
+        this.dialogVisible = true
+      },
+      //上传图片
+      uploadSuccess(res) {
+        //预览图片
+        this.imageUrl = res.data.url
+        this.$message.success('上传成功')
+        //上传成功关闭
+        window.setTimeout(()=> {
+          this.dialogVisible = false
+          this.getImages()
+        },2000)
+      },
     }
   }
 </script>
