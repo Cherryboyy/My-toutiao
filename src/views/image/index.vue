@@ -6,7 +6,7 @@
       </div>
       <!--        按钮区域-->
       <div class="btn_box">
-        <el-radio-group v-model="filterParams.collect" size="small">
+        <el-radio-group @change="changeCollect" v-model="filterParams.collect" size="small">
           <el-radio-button :label="false">全部</el-radio-button>
           <el-radio-button :label="true">收藏</el-radio-button>
         </el-radio-group>
@@ -16,9 +16,9 @@
       <div class="img_list">
         <div class="img_item" v-for="item in images" :key="item.id">
           <img :src="item.url" alt/>
-          <div class="option">
-            <span class="el-icon-star-off" :class="{red:item.is_collected}"></span>
-            <span class="el-icon-delete"></span>
+          <div class="option" v-if="!filterParams.collect">
+            <span @click="toggleStatus(item)" class="el-icon-star-off" :class="{red:item.is_collected}"></span>
+            <span class="el-icon-delete" @click="delImage(item.id)"></span>
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@
         background
         layout="prev, pager, next"
         :current-page="filterParams.page"
-        :page-size = "filterParams.per_page"
+        :page-size="filterParams.per_page"
         @current-change="changPager"
         :total="total">
 
@@ -47,7 +47,7 @@
           page: 1,
           per_page: 10
         },
-        total:0,
+        total: 0,
         //图片数据
         images: []
       }
@@ -68,6 +68,34 @@
       changPager(newPage) {
         this.filterParams.page = newPage
         this.getImages()
+      },
+      //处理来回切换的数据
+      changeCollect() {
+        this.filterParams.page = 1,
+          this.getImages()
+      },
+      //收藏图片处理函数
+      async toggleStatus(item) {
+        try {
+          const {data: {data}} = await this.$http.put(`user/images/${item.id}`, {
+            collect: !item.is_collected
+          })
+          this.$message.success(data.collect ? '添加收藏成功' : '取消收藏成功')
+          //收藏成功修改星星样式
+          item.is_collected = data.collect
+        } catch (e) {
+          this.$message.error('操作失败')
+        }
+      },
+      //删除图片
+      async delImage(id) {
+        try {
+          await this.$http.delete(`user/images/${id}`)
+          this.$message.success('删除成功')
+          this.getImages()
+        } catch (e) {
+          this.$message.error('删除图片失败')
+        }
       }
     }
   }
